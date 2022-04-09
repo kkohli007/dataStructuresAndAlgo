@@ -2,26 +2,40 @@ package src.algorithms.sorting;
 
 import src.common.CommonUtil;
 
+import java.util.Arrays;
+
 public class CountingSortUnstable {
 
-    private static int[] unsortedArray = {20,-15,7,35,55,1,-22};
+    private static int[] unsortedArray = {12,15,19,18,12,18,17,20,14};
 
     public static void main(String[] args)
     {
         System.out.println("UnsortedArray: " + CommonUtil.printMyArray(unsortedArray));
 
-        int unsortedPosition = unsortedArray.length - 1;
+        // we know range is 11-20
+        int min = 11;
+        int max = 20;
 
-        while (unsortedPosition>0)
+        int[] countArray = new int[max-min + 1];
+
+        for(int i=0;i<unsortedArray.length;i++)
         {
-            for (int i=0; i <= unsortedPosition - 1; i++)
+            int currentElementPosition=unsortedArray[i]-min;
+            countArray[currentElementPosition]++ ;
+        }
+
+        System.out.println("Countarray: " + CommonUtil.printMyArray(countArray));
+
+        int x=0;
+        for(int j=0; j<countArray.length;j++)
+        {
+            int numberOfValues = countArray[j];
+
+            while(numberOfValues>0)
             {
-                if(unsortedArray[i] > unsortedArray[i+1])
-                {
-                    CommonUtil.swap(unsortedArray, i, i+1);
-                }
+                unsortedArray[x++]=j+min;
+                numberOfValues--;
             }
-            unsortedPosition--;
         }
 
         System.out.println("SortedArray: " + CommonUtil.printMyArray(unsortedArray));

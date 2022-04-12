@@ -4,7 +4,7 @@ import src.common.CommonUtil;
 
 public class MergeSort {
 
-    private static int[] unsortedArray = {20,-15,7,35,55,7,1,-22};
+    private static int[] unsortedArray = {20,-15,7,35,55,1,-22};
 
     public static void main(String[] args)
     {
@@ -42,7 +42,7 @@ public class MergeSort {
                 mergedArray[i]=rightArray[rightArrayCounter];
                 rightArrayCounter++;
             }
-            else if(rightArrayCounter>=leftArray.length)
+            else if(rightArrayCounter>=rightArray.length)
             {
                 mergedArray[i]=leftArray[leftArrayCounter];
                 leftArrayCounter++;

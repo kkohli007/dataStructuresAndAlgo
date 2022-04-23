@@ -4,64 +4,54 @@ import src.common.CommonUtil;
 
 public class QuickSort {
 
-    private static int[] unsortedArray = {20,35,-15,7,55,1,-22,7};
+    private static int[] unsortedArray = {95,13,47,52,41,68,42};
 
     public static void main(String[] args)
     {
         System.out.println("UnsortedArray: " + CommonUtil.printMyArray(unsortedArray));
 
-        unsortedArray = quickSort(unsortedArray, 0, unsortedArray.length-1);
+        quickSort(unsortedArray, 0, unsortedArray.length-1);
 
         System.out.println("SortedArray: " + CommonUtil.printMyArray(unsortedArray));
     }
 
-    private static int[] quickSort(int[] myArray, int start, int end)
+    private static void quickSort(int[] arr, int low, int high)
     {
-        System.out.println("Start Printing array:" + CommonUtil.printMyArray(myArray));
-
-        if (start>=end)
+        if (low>=high)
         {
-            return myArray;
+            return;
         }
 
-        int pivotElement =myArray[start];
+        int j = partition(arr, low, high);
+        quickSort(arr,low, j-1);
+        quickSort(arr,j+1, high);
+    }
 
-        int i = start+1;
-        int j = end;
+    private static int partition(int[] arr, int low, int high) {
+        int pivotElement = arr[low];
+
+        int i = low;
+        int j = high;
 
         while (i < j)
         {
-            while (myArray[i] <= pivotElement && i<end)
+            while (arr[i] <= pivotElement && i< high)
             {
                 i++;
             }
 
-            while (myArray[j] >= pivotElement && j>start)
+            while (arr[j] > pivotElement && j> low)
             {
                 j--;
             }
 
             if(i<j)
             {
-                CommonUtil.swap(myArray, i, j);
-                i++; j--;
+                CommonUtil.swap(arr, i, j);
             }
         }
 
-        if(myArray[start] > myArray[j])
-        {
-            CommonUtil.swap(myArray, start, j);
-        }
-
-
-
-        quickSort(myArray,start, j-1);
-        quickSort(myArray,j+1, end);
-
-        System.out.println("End Printing mergedArray:" + CommonUtil.printMyArray(myArray));
-
-        return myArray;
+        CommonUtil.swap(arr, low, j);
+        return j;
     }
-
-
 }

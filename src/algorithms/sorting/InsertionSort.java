@@ -15,6 +15,38 @@ public class InsertionSort {
         unsortedArray= insertionSort(unsortedArray);
 
         System.out.println("SortedArray: " + CommonUtil.printMyArray(unsortedArray));
+
+        System.out.println("------Recursion------");
+
+        int[] unsortedArray2 = {20,-15,7,35,55,7,1,-22};
+
+        System.out.println("UnsortedArray: " + CommonUtil.printMyArray(unsortedArray2));
+
+        unsortedArray2= insertionSortUsingRecursion(unsortedArray2, unsortedArray2.length);
+
+        System.out.println("SortedArray: " + CommonUtil.printMyArray(unsortedArray2));
+    }
+
+    /*
+        Algo:: sort n items, but first sort n-1 items... until 1 item
+        so by the time when we are sorting nth item, we would have sorted first n-1 items
+        while sorting nth item, find correct insertion point while going back.
+     */
+    private static int[] insertionSortUsingRecursion(int[] unsortedArray, int numOfItems)
+    {
+        //{20,-15,7,35,55,7,1,-22}
+
+        if (numOfItems < 2)
+            return unsortedArray;
+
+        insertionSortUsingRecursion(unsortedArray, numOfItems-1);
+
+        for(int i=numOfItems-2; i>=0 && unsortedArray[i] > unsortedArray[i+1]; i--)
+        {
+            CommonUtil.swap(unsortedArray, i, i+1);
+        }
+        System.out.println("SortedArray intermediate: " + CommonUtil.printMyArray(unsortedArray) + " when numOfItems:" + numOfItems);
+        return unsortedArray;
     }
 
     public static int[] insertionSort(int[] unsortedArray) {

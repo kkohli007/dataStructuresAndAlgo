@@ -15,9 +15,9 @@ class TestSinglyLinkedList
         singlyLinkedList.addNode("3");
         singlyLinkedList.display();
         singlyLinkedList.displayHeadAndTail();
-        System.out.println("MyList.size:: "+singlyLinkedList.getSize());
+        System.out.println("MyList.size:: " + singlyLinkedList.getSize());
 
-        System.out.println(singlyLinkedList.getHead());
+        System.out.println("MyList.head:: " + singlyLinkedList.getHead());
 
         // delete items from list
         singlyLinkedList.deleteNode();
@@ -25,7 +25,7 @@ class TestSinglyLinkedList
         System.out.println("MyList.size:: "+singlyLinkedList.getSize());
 
         singlyLinkedList.addNode("4");
-        System.out.println(singlyLinkedList.getHead());
+        System.out.println("MyList.head:: " + singlyLinkedList.getHead());
 
         // add items at particular index
         singlyLinkedList.addNode(2, "3.1");
@@ -40,7 +40,7 @@ class TestSinglyLinkedList
         singlyLinkedList.deleteNode(4);
         singlyLinkedList.display();
 
-        System.out.println(singlyLinkedList.getHead());
+        System.out.println("MyList.head:: " + singlyLinkedList.getHead());
     }
 }
 
@@ -160,7 +160,7 @@ public class SinglyLinkedList
     {
         if(head == null)
         {
-            return;
+            System.out.println("Out of bounds, empty list:");
         }
         else if (head.getNext() == null)
         {

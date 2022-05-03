@@ -44,7 +44,38 @@ class TestSinglyLinkedList
     }
 }
 
-public class SinglyLinkedList {
+public class SinglyLinkedList
+{
+    private class Node
+    {
+        private String data;
+
+        private Node next;
+
+        public String getData() {
+            return data;
+        }
+
+        public void setData(String data) {
+            this.data = data;
+        }
+
+        public Node getNext() {
+            return next;
+        }
+
+        public void setNext(Node next) {
+            this.next = next;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "data='" + data + '\'' +
+                    ", next=" + next +
+                    '}';
+        }
+    }
 
     private Node head = null;
     // optional tail reference to add to end with O(1)
@@ -209,36 +240,5 @@ public class SinglyLinkedList {
     public int getSize()
     {
         return size;
-    }
-}
-
-class Node
-{
-    private String data;
-
-    private Node next;
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public Node getNext() {
-        return next;
-    }
-
-    public void setNext(Node next) {
-        this.next = next;
-    }
-
-    @Override
-    public String toString() {
-        return "Node{" +
-                "data='" + data + '\'' +
-                ", next=" + next +
-                '}';
     }
 }

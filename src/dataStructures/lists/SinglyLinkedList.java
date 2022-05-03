@@ -24,6 +24,22 @@ class TestSinglyLinkedList
         singlyLinkedList.display();
         System.out.println("MyList.size:: "+singlyLinkedList.getSize());
 
+        singlyLinkedList.addNode("4");
+        System.out.println(singlyLinkedList.getHead());
+
+        // add items at particular index
+        singlyLinkedList.addNode(2, "3.1");
+        singlyLinkedList.addNode(0, "1");
+        singlyLinkedList.addNode(10, "10");
+        singlyLinkedList.addNode(5, "5");
+        singlyLinkedList.display();
+
+        // delete items at particular index
+        singlyLinkedList.deleteNode(3);
+        singlyLinkedList.deleteNode(0);
+        singlyLinkedList.deleteNode(4);
+        singlyLinkedList.display();
+
         System.out.println(singlyLinkedList.getHead());
     }
 }
@@ -40,7 +56,6 @@ public class SinglyLinkedList {
         Adds item to end
         Can also do add item to front with just storing head node reference
         both approaches with O(1) complexity
-        any implementation to add item at particular index or before/after particular element would have O(n) complexity
      */
     public void addNode(String data)
     {
@@ -66,8 +81,49 @@ public class SinglyLinkedList {
     }
 
     /*
+    add item at particular index or before/after particular element would have O(n) complexity
+     */
+    public void addNode(int index, String data)
+    {
+        if(index>size)
+        {
+            System.out.println("Out of bounds, can't add at index:" + index);
+        }
+        //adding at the end
+        else if(index==size || head == null || head.getNext() == null)
+        {
+            addNode(data);
+        }
+        else if(index==0)
+        {
+            Node node = new Node();
+            node.setData(data);
+            node.setNext(head);
+            head = node;
+            size++;
+        }
+        else
+        {
+            // 0 ,1, 2, 3 .. index == 2,, size=4
+            int currentPosition = 0;
+            Node currentNode = head;
+            while( currentPosition < index - 1 )
+            {
+                currentPosition++;
+                currentNode = currentNode.getNext();
+            }
+
+            Node node = new Node();
+            node.setData(data);
+            node.setNext(currentNode.getNext());
+            currentNode.setNext(node);
+            size++;
+        }
+    }
+
+
+    /*
         Deletes item from front with O(1) complexity
-        Delete from end node (or at particular index) would require traversal to know previous node from tail so O(n)
      */
     public void deleteNode()
     {
@@ -84,6 +140,36 @@ public class SinglyLinkedList {
         {
             size--;
             head = head.getNext();
+        }
+    }
+
+    /*
+    Delete from end node or at particular index would require traversal to know previous node from tail so O(n)
+     */
+    public void deleteNode(int index)
+    {
+        if(index>size-1)
+        {
+            System.out.println("Out of bounds, can't remove from index:" + index);
+        }
+        //removing at the front
+        else if(index==0 || head == null || head.getNext() == null)
+        {
+            deleteNode();
+        }
+        else
+        {
+            // 0 ,1, 2, 3 .. index == 2,, size=4
+            int currentPosition = 0;
+            Node currentNode = head;
+            while( currentPosition < index - 1 )
+            {
+                currentPosition++;
+                currentNode = currentNode.getNext();
+            }
+
+            currentNode.setNext(currentNode.getNext().getNext());
+            size--;
         }
     }
 

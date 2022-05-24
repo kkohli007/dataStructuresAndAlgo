@@ -41,6 +41,26 @@ class TestSinglyLinkedList
         singlyLinkedList.display();
 
         System.out.println("MyList.head:: " + singlyLinkedList.getHead());
+
+        singlyLinkedList.reverseIterative();
+        singlyLinkedList.display();
+        System.out.println("MyList.head:: " + singlyLinkedList.getHead());
+
+        // reverse recursive, can put this recursive inside wrapper so end user doesn't have to call with params
+        singlyLinkedList.reverseRecursive(null, singlyLinkedList.getHead());
+        singlyLinkedList.display();
+        System.out.println("MyList.head:: " + singlyLinkedList.getHead());
+
+        // Create sorted list //O(n)
+        SinglyLinkedList sortedList = new SinglyLinkedList();
+        sortedList.addSorted("b");
+        sortedList.addSorted("d");
+        sortedList.addSorted("f");
+        sortedList.addSorted("a");
+        sortedList.addSorted("g");
+        sortedList.addSorted("c");
+        sortedList.addSorted("aa");
+        sortedList.display();
     }
 }
 
@@ -84,11 +104,33 @@ public class SinglyLinkedList
     private int size = 0;
 
     /*
-        Adds item to end
+        Adds item to front
         Can also do add item to front with just storing head node reference
         both approaches with O(1) complexity
      */
     public void addNode(String data)
+    {
+        Node node = new Node();
+        node.setData(data);
+        size++;
+
+        if(head == null)
+        {
+            head = tail = node;
+        }
+        else
+        {
+            node.setNext(head);
+            head = node;
+        }
+    }
+
+    /*
+        Adds item to end
+        Can also do add item to front with just storing head node reference
+        both approaches with O(1) complexity
+     */
+    public void addNodeAtEnd(String data)
     {
         Node node = new Node();
         node.setData(data);
@@ -156,22 +198,26 @@ public class SinglyLinkedList
     /*
         Deletes item from front with O(1) complexity
      */
-    public void deleteNode()
+    public String deleteNode()
     {
+        String temp = null;
         if(head == null)
         {
             System.out.println("Out of bounds, empty list:");
         }
         else if (head.getNext() == null)
         {
+            temp = head.getData();
             size--;
             head = null;
         }
         else
         {
+            temp = head.getData();
             size--;
             head = head.getNext();
         }
+        return temp;
     }
 
     /*
@@ -182,6 +228,7 @@ public class SinglyLinkedList
         if(index>size-1)
         {
             System.out.println("Out of bounds, can't remove from index:" + index);
+
         }
         //removing at the front
         else if(index==0 || head == null || head.getNext() == null)
@@ -237,8 +284,75 @@ public class SinglyLinkedList
         return head;
     }
 
+    public String getHeadData()
+    {
+        if (head == null)
+            return null;
+
+        return head.getData();
+    }
+
     public int getSize()
     {
         return size;
+    }
+
+
+    public void reverseIterative()
+    {
+        if(head == null || head.getNext()==null)
+            return;
+
+        Node currentNode = head;
+        Node nextNode = currentNode.getNext();
+
+        while (nextNode !=null)
+        {
+            Node temp = nextNode.getNext();
+            nextNode.setNext(currentNode);
+            currentNode = nextNode;
+            nextNode = temp;
+
+        }
+        head.setNext(null);
+        head = currentNode;
+    }
+
+    public void reverseRecursive(Node previousNode, Node currentNode)
+    {
+        if(currentNode.getNext()!=null)
+        {
+            reverseRecursive(currentNode, currentNode.getNext());
+        }
+
+        if(currentNode.getNext()==null)
+        {
+            head = currentNode;
+        }
+        currentNode.setNext(previousNode);
+    }
+
+    public void addSorted(String data)
+    {
+        Node node = new Node();
+        node.setData(data);
+        size++;
+
+        // when head is greater than current value or when head is null, add node at head
+        if(head == null || head.getData().compareTo(data)>0)
+        {
+            node.setNext(head);
+            head = node;
+        }
+        else
+        {
+            Node currentNode = head;
+            while(currentNode.getNext() != null && currentNode.getNext().getData().compareTo(data)<0)
+            {
+                currentNode = currentNode.getNext();
+            }
+            node.setNext(currentNode.getNext());
+            currentNode.setNext(node);
+        }
     }
 }

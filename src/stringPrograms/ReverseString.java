@@ -1,5 +1,8 @@
 package src.stringPrograms;
 
+import src.dataStructures.queues.QueueUsingArray;
+import src.dataStructures.stack.StackUsingLinkedList;
+
 public class ReverseString {
 
     public static void main(String[] args)
@@ -13,6 +16,12 @@ public class ReverseString {
         System.out.println("String s2:"+s2);
         System.out.println("Reversed String s2:"+ reverseString(s2));
         System.out.println("Reversed String using char array s2:"+ reverseStringUsingCharArray(s2));
+
+        System.out.println("Is Palindrome String:" + "hello" + " --> " + isPalindromeIgnoringPunctuationUsingStack("hello"));
+        System.out.println("Is Palindrome String:" + "Don't Nod" + " --> " + isPalindromeIgnoringPunctuationUsingStack("Don't Nod"));
+        System.out.println("Is Palindrome String:" + "I did!!! did I???" + " --> " + isPalindromeIgnoringPunctuationUsingStack("I did!!! did I???"));
+
+        System.out.println("Is Palindrome String:" + "I did!!! did I???" + " --> " + isPalindromeIgnoringPunctuationUsingStackAndQueue("I did!!! did I???"));
     }
 
     //O(n)
@@ -59,5 +68,64 @@ public class ReverseString {
         StringBuilder sb = new StringBuilder(str);
 
         return sb.reverse().toString();
+    }
+
+    public static boolean isPalindromeIgnoringPunctuationUsingStack(String str)
+    {
+        if(str!=null && str.length()<=1)
+        {
+            return true;
+        }
+        StackUsingLinkedList stack = new StackUsingLinkedList();
+
+        StringBuilder straightString = new StringBuilder();
+        for (int i=0; i<str.length(); i++)
+        {
+            char chr = str.toLowerCase().charAt(i);
+            if((chr >= 'a' && chr<='z')||(chr >= 'A' && chr<='Z'))
+            {
+                straightString.append(chr);
+                stack.push(String.valueOf(chr));
+            }
+        }
+
+        StringBuilder reverseString = new StringBuilder();
+
+        while(stack.peek()!=null)
+            reverseString.append(stack.pop());
+
+        if(straightString.toString().equalsIgnoreCase(reverseString.toString()))
+            return true;
+        else
+            return false;
+    }
+
+    public static boolean isPalindromeIgnoringPunctuationUsingStackAndQueue(String str)
+    {
+        if(str!=null && str.length()<=1)
+        {
+            return true;
+        }
+        StackUsingLinkedList stack = new StackUsingLinkedList();
+        QueueUsingArray queue = new QueueUsingArray();
+
+        StringBuilder straightString = new StringBuilder();
+        for (int i=0; i<str.length(); i++)
+        {
+            char chr = str.toLowerCase().charAt(i);
+            if((chr >= 'a' && chr<='z')||(chr >= 'A' && chr<='Z'))
+            {
+                straightString.append(chr);
+                stack.push(String.valueOf(chr));
+                queue.add(String.valueOf(chr));
+            }
+        }
+
+        while(stack.peek()!=null)
+        {
+            if(!stack.pop().equalsIgnoreCase(queue.remove()))
+                return false;
+        }
+        return true;
     }
 }

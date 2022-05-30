@@ -1,6 +1,10 @@
 package src.common;
 
+import src.dto.Employee;
+import src.dto.HashedEmployee;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class CommonUtil {
 
@@ -52,6 +56,60 @@ public class CommonUtil {
         }
         sb.deleteCharAt(sb.length() - 1);
         sb.append("}");
+        return sb.toString();
+    }
+
+    public static String printMyArray(Employee[] empArray)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("----Printing my employee array----" + "\n");
+        sb.append("{ \n");
+        for (int j =0; j < empArray.length; j++)
+        {
+            sb.append(empArray[j] + "," +"\n");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append("\n } \n");
+        sb.append("----Printing my employee array----");
+        return sb.toString();
+    }
+
+    public static String printMyArray(HashedEmployee[] empArray)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("----Printing my employee array----" + "\n");
+        sb.append("{ \n");
+        for (int j =0; j < empArray.length; j++)
+        {
+            sb.append((empArray[j]!=null? empArray[j].getEmployee() : null) + "," +"\n");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append("\n } \n");
+        sb.append("----Printing my employee array----");
+        return sb.toString();
+    }
+
+    public static String printMyArray(LinkedList<HashedEmployee>[] empArray)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("----Printing my employee array----" + "\n");
+        sb.append("{ \n");
+        for (int j =0; j < empArray.length; j++)
+        {
+            sb.append(j + " --> ");
+            if(empArray[j] !=null) {
+                for (HashedEmployee hashedEmployee : empArray[j]) {
+                    sb.append(hashedEmployee.getEmployee() + "-->");
+                }
+            }
+            else
+            {
+                sb.append("null");
+            }
+            sb.append("\n");
+        }
+        sb.append("} \n");
+        sb.append("----End Printing my employee array----");
         return sb.toString();
     }
 }

@@ -112,4 +112,20 @@ public class CommonUtil {
         sb.append("----End Printing my employee array----");
         return sb.toString();
     }
+
+    public static String printMyLinkedList(LinkedList<Employee> employeeList) {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("----Printing my employee list----" + "\n");
+        sb.append("{ \n");
+        for (int j =0; j < employeeList.size(); j++)
+        {
+            sb.append(j + " --> ");
+            sb.append(employeeList.get(j));
+            sb.append("\n");
+        }
+        sb.append("} \n");
+        sb.append("----End Printing my employee list----");
+        return sb.toString();
+    }
 }

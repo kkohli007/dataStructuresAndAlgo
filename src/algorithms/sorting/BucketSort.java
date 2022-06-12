@@ -41,6 +41,7 @@ public class BucketSort {
 
         for(int i = 0; i< unsortedArray.length; i++)
         {
+            // this is like hash function
             bucketList.get(unsortedArray[i]/ buckets).add(unsortedArray[i]);
         }
 

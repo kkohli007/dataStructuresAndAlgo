@@ -18,6 +18,17 @@ public class BinarySearch {
 
         position = searchElement(88, 0, sortedArray.length, sortedArray);
         System.out.println("Element 88 present at : " + position);
+
+        // Search Iterative
+        position = searchElementIterative(55, sortedArray);
+        System.out.println("Element 55 present at : " + position);
+
+        position = searchElementIterative(-22, sortedArray);
+        System.out.println("Element 88 present at : " + position);
+
+        position = searchElementIterative(88, sortedArray);
+        System.out.println("Element 88 present at : " + position);
+
     }
 
     private static int searchElement(int num, int start, int end, int[] array)
@@ -43,5 +54,32 @@ public class BinarySearch {
         {
             return searchElement(num, middle + 1, end, array);
         }
+    }
+
+    private static int searchElementIterative(int num, int[] array)
+    {
+        int start = 0;
+        int end = array.length;
+        while(start<end)
+        {
+            int middle = (end + start)/2;
+
+            // search middle
+            if(array[middle] == num)
+            {
+                System.out.println("Element " + num + " found" );
+                return middle;
+            }
+            else if (array[middle] > num)
+            {
+                end = middle;
+            }
+            else
+            {
+                start = middle + 1;
+            }
+
+        }
+        return -1;
     }
 }

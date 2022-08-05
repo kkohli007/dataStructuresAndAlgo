@@ -15,7 +15,7 @@ public class MergeSort {
         System.out.println("SortedArray: " + CommonUtil.printMyArray(unsortedArray));
     }
 
-    private static int[] mergeSort(int[] array)
+    public static int[] mergeSort(int[] array)
     {
         System.out.println("Start Printing array:" + CommonUtil.printMyArray(array));
         if(array.length==1)

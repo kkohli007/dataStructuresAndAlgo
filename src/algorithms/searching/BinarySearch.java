@@ -31,7 +31,7 @@ public class BinarySearch {
 
     }
 
-    private static int searchElement(int num, int start, int end, int[] array)
+    public static int searchElement(int num, int start, int end, int[] array)
     {
         if(start == end)
         {
@@ -56,7 +56,7 @@ public class BinarySearch {
         }
     }
 
-    private static int searchElementIterative(int num, int[] array)
+    public static int searchElementIterative(int num, int[] array)
     {
         int start = 0;
         int end = array.length;

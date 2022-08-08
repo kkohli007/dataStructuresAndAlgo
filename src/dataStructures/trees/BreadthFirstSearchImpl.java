@@ -1,6 +1,6 @@
 package src.dataStructures.trees;
 
-public class BreadthFirstSearch {
+public class BreadthFirstSearchImpl {
 
     public static void main(String[] args) {
 

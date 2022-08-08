@@ -256,6 +256,11 @@ public class BinarySearchTree {
     public void display() {
         System.out.println(root.toString());
     }
+
+    public TreeNode getRoot()
+    {
+        return root;
+    }
 }
 
 class TreeNode {

@@ -3,7 +3,7 @@ package src.algorithms.recursion;
 public class fibonacci {
     public static void main(String[] args) {
         // 0,1,1,2,3,5,8,13,21,34,55...
-        int index = 40;
+        int index = 47;
 
         int Fibonacci = findFibonacciIterative(index);
         System.out.println("Fibonacci iterative:" + Fibonacci);
@@ -14,7 +14,12 @@ public class fibonacci {
 
     private static int findFibonacciRecursive(int index)
     {
-        return findFibonacciRecursive(1, 1, --index);
+        if(index == 0)
+            return 0;
+        else if(index <= 2)
+            return 1;
+        else
+            return findFibonacciRecursive(1, 1, --index);
     }
 
     private static int findFibonacciRecursive(int num1, int num2, int index)

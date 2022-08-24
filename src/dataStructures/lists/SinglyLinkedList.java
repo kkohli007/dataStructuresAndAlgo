@@ -66,40 +66,9 @@ class TestSinglyLinkedList
 
 public class SinglyLinkedList
 {
-    private class Node
-    {
-        private String data;
-
-        private Node next;
-
-        public String getData() {
-            return data;
-        }
-
-        public void setData(String data) {
-            this.data = data;
-        }
-
-        public Node getNext() {
-            return next;
-        }
-
-        public void setNext(Node next) {
-            this.next = next;
-        }
-
-        @Override
-        public String toString() {
-            return "Node{" +
-                    "data='" + data + '\'' +
-                    ", next=" + next +
-                    '}';
-        }
-    }
-
-    private Node head = null;
+    private SinglyLinkedListNode head = null;
     // optional tail reference to add to end with O(1)
-    private Node tail = null;
+    private SinglyLinkedListNode tail = null;
 
     private int size = 0;
 
@@ -110,7 +79,7 @@ public class SinglyLinkedList
      */
     public void addNode(String data)
     {
-        Node node = new Node();
+        SinglyLinkedListNode node = new SinglyLinkedListNode();
         node.setData(data);
         size++;
 
@@ -132,7 +101,7 @@ public class SinglyLinkedList
      */
     public void addNodeAtEnd(String data)
     {
-        Node node = new Node();
+        SinglyLinkedListNode node = new SinglyLinkedListNode();
         node.setData(data);
         node.setNext(null);
         size++;
@@ -169,7 +138,7 @@ public class SinglyLinkedList
         }
         else if(index==0)
         {
-            Node node = new Node();
+            SinglyLinkedListNode node = new SinglyLinkedListNode();
             node.setData(data);
             node.setNext(head);
             head = node;
@@ -179,14 +148,14 @@ public class SinglyLinkedList
         {
             // 0 ,1, 2, 3 .. index == 2,, size=4
             int currentPosition = 0;
-            Node currentNode = head;
+            SinglyLinkedListNode currentNode = head;
             while( currentPosition < index - 1 )
             {
                 currentPosition++;
                 currentNode = currentNode.getNext();
             }
 
-            Node node = new Node();
+            SinglyLinkedListNode node = new SinglyLinkedListNode();
             node.setData(data);
             node.setNext(currentNode.getNext());
             currentNode.setNext(node);
@@ -239,7 +208,7 @@ public class SinglyLinkedList
         {
             // 0 ,1, 2, 3 .. index == 2,, size=4
             int currentPosition = 0;
-            Node currentNode = head;
+            SinglyLinkedListNode currentNode = head;
             while( currentPosition < index - 1 )
             {
                 currentPosition++;
@@ -258,7 +227,7 @@ public class SinglyLinkedList
         else
         {
             System.out.print("MyList :: ");
-            Node currentNode = head;
+            SinglyLinkedListNode currentNode = head;
             while(currentNode != null)
             {
                 System.out.print("{"+currentNode.getData()+"}");
@@ -279,7 +248,12 @@ public class SinglyLinkedList
         }
     }
 
-    public Node getHead()
+    public void setHead(SinglyLinkedListNode head)
+    {
+        this.head = head;
+    }
+
+    public SinglyLinkedListNode getHead()
     {
         return head;
     }
@@ -303,12 +277,12 @@ public class SinglyLinkedList
         if(head == null || head.getNext()==null)
             return;
 
-        Node currentNode = head;
-        Node nextNode = currentNode.getNext();
+        SinglyLinkedListNode currentNode = head;
+        SinglyLinkedListNode nextNode = currentNode.getNext();
 
         while (nextNode !=null)
         {
-            Node temp = nextNode.getNext();
+            SinglyLinkedListNode temp = nextNode.getNext();
             nextNode.setNext(currentNode);
             currentNode = nextNode;
             nextNode = temp;
@@ -318,7 +292,7 @@ public class SinglyLinkedList
         head = currentNode;
     }
 
-    public void reverseRecursive(Node previousNode, Node currentNode)
+    public void reverseRecursive(SinglyLinkedListNode previousNode, SinglyLinkedListNode currentNode)
     {
         if(currentNode.getNext()!=null)
         {
@@ -334,7 +308,7 @@ public class SinglyLinkedList
 
     public void addSorted(String data)
     {
-        Node node = new Node();
+        SinglyLinkedListNode node = new SinglyLinkedListNode();
         node.setData(data);
         size++;
 
@@ -346,7 +320,7 @@ public class SinglyLinkedList
         }
         else
         {
-            Node currentNode = head;
+            SinglyLinkedListNode currentNode = head;
             while(currentNode.getNext() != null && currentNode.getNext().getData().compareTo(data)<0)
             {
                 currentNode = currentNode.getNext();

@@ -72,6 +72,19 @@ public class CommonUtil {
         return sb.toString();
     }
 
+    public static String printMyArrayListLong(ArrayList<Long> bucket)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        for (long i: bucket)
+        {
+            sb.append(i + ",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append("}");
+        return sb.toString();
+    }
+
     public static String printMyArray(Employee[] empArray)
     {
         StringBuilder sb = new StringBuilder();

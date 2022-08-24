@@ -1,5 +1,6 @@
 package src.geeksForGeeksProblems.easy;
 
+import com.sun.deploy.panel.DeleteFilesDialog;
 import src.common.CommonUtil;
 
 import java.util.ArrayList;
@@ -23,6 +24,11 @@ public class ArrayProblems2 {
         // find min distance
         int array2[] = {2,1,3,2};
         System.out.println(minDist(array2, 4, 2, 3));
+
+        // find first and last occurrence
+        long array3[] = { 1, 3, 5, 5, 5, 5, 67, 123, 125 };
+        System.out.println(CommonUtil.printMyArrayListLong(find(array3, 9, 5)));
+        System.out.println(CommonUtil.printMyArrayListLong(findFirstLastOccurrence(array3, 9, 5)));
     }
 
     // O(n)
@@ -95,6 +101,114 @@ public class ArrayProblems2 {
             return minDist;
         else
             return -1;
+    }
+
+    // { 1, 3, 5, 5, 5, 5, 67, 123, 125 }
+    public static ArrayList<Long> find(long arr[], int n, int x)
+    {
+        //int lowestOcc = Integer.MAX_VALUE;
+        //int highestOcc = Integer.MIN_VALUE;
+
+        ArrayList<Long> resultList = new ArrayList<>(2);
+        resultList.add(Long.MAX_VALUE);
+        resultList.add(Long.MIN_VALUE);
+
+        findRecursive(arr, 0, n, x, resultList);
+
+        if(resultList.get(0) == Long.MAX_VALUE)
+        {
+            resultList.set(0, Long.valueOf(-1));
+            resultList.set(1, Long.valueOf(-1));
+        }
+
+        return resultList;
+    }
+
+    static ArrayList<Long> findRecursive(long arr[], int start, int end, int x, ArrayList<Long> resultList)
+    {
+        if(start==end)
+            return resultList;
+
+        int middle = (start + end)/2;
+
+        if(arr[middle] == x)
+        {
+            resultList.set(0, Math.min(resultList.get(0),middle));
+            resultList.set(1, Math.max(resultList.get(1),middle));
+
+            //check left
+            findRecursive(arr, start, middle, x, resultList);
+
+            //check right
+            findRecursive(arr, middle+1, end, x, resultList);
+        }
+        else if(arr[middle] < x)
+        {
+            //check right
+            findRecursive(arr, middle+1, end, x, resultList);
+        }
+        else
+        {
+            //check left
+            findRecursive(arr, start, middle, x, resultList);
+        }
+        return resultList;
+    }
+
+
+    // { 1, 3, 5, 5, 5, 5, 67, 123, 125 }
+    public static ArrayList<Long> findFirstLastOccurrence(long arr[], int n, int x)
+    {
+
+        ArrayList<Long> resultList = new ArrayList<>(2);
+
+        int firstPos = findFirstOccurrence(arr, 0, n, x);
+        int lastPos = findLastOccurrence(arr, 0, n, x);
+
+        resultList.add(Long.valueOf(firstPos));
+        resultList.add(Long.valueOf(lastPos));
+
+        return resultList;
+    }
+
+    public static int findFirstOccurrence(long arr[], int low, int high, int x)
+    {
+        if(low==high)
+            return -1;
+        int mid = low + (high-low)/2;
+
+        if(arr[mid] == x && (mid == 0 || arr[mid-1]<x))
+        {
+            return mid;
+        }
+        else if(arr[mid] < x)
+        {
+            return findFirstOccurrence(arr, mid+1, high, x);
+        }
+        else
+        {
+            return findFirstOccurrence(arr, low, mid, x);
+        }
+    }
+
+    public static int findLastOccurrence(long arr[], int low, int high, int x)
+    {
+        if(low==high)
+            return -1;
+        int mid = low + (high-low)/2;
+
+        if(arr[mid] == x && (mid == arr.length-1 || arr[mid+1]>x))
+        {
+            return mid;
+        }
+        else if(arr[mid] > x)
+        {
+            return findLastOccurrence(arr, low, mid, x);
+        }
+        else
+        {
+            return findLastOccurrence(arr, mid+1, high, x);
+        }
     }
 
 }

@@ -16,6 +16,17 @@ public class TreeProblems {
 
         System.out.println(inOrder(bst.getRoot()));
 
+        // Find minimum node
+        BinarySearchTree bst2 = new BinarySearchTree(1);
+        bst2.insert(5);
+        bst2.insert(4);
+        bst2.insert(6);
+        bst2.insert(3);
+        bst2.insert(7);
+        bst2.display();
+
+        System.out.println("Mininum value in tree: " + minValue(bst2.getRoot()));
+
 
     }
 
@@ -37,5 +48,19 @@ public class TreeProblems {
             inOrderTraversalNode(node.getRight(),inOrderList);
         }
         return inOrderList;
+    }
+
+    static int minValue(TreeNode node) {
+
+        if(node == null)
+            return -1;
+
+        TreeNode currNode = node;
+        while(currNode.getLeft()!=null)
+        {
+            currNode = currNode.getLeft();
+        }
+        return currNode.getData();
+
     }
 }

@@ -29,6 +29,10 @@ public class ArrayProblems2 {
         long array3[] = { 1, 3, 5, 5, 5, 5, 67, 123, 125 };
         System.out.println(CommonUtil.printMyArrayListLong(find(array3, 9, 5)));
         System.out.println(CommonUtil.printMyArrayListLong(findFirstLastOccurrence(array3, 9, 5)));
+
+        // third largest element in array
+        int array4[] = {2,4,1,3,5};
+        System.out.println(thirdLargest(array4, array4.length));
     }
 
     // O(n)
@@ -209,6 +213,35 @@ public class ArrayProblems2 {
         {
             return findLastOccurrence(arr, mid+1, high, x);
         }
+    }
+    static int thirdLargest(int a[], int n)
+    {
+        if(n<3)
+            return -1;
+        // Your code here
+        int first = a[0];
+        int second = -1;
+        int third = -1;
+
+        for(int i=1; i<n; i++)
+        {
+            if(a[i]> first)
+            {
+                third = second;
+                second = first;
+                first = a[i];
+            }
+            else if(a[i] > second)
+            {
+                third = second;
+                second = a[i];
+            }
+            else if(a[i] > third)
+            {
+                third = a[i];
+            }
+        }
+        return third;
     }
 
 }

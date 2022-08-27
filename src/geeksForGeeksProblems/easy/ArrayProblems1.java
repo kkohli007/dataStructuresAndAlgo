@@ -2,6 +2,9 @@ package src.geeksForGeeksProblems.easy;
 
 import src.common.CommonUtil;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.*;
 
 public class ArrayProblems1 {
@@ -9,16 +12,16 @@ public class ArrayProblems1 {
     public static void main(String[] args) {
 
         // find if all array elements are palindrome
-        int[] arr = {111,222,330,444,555};
+        int[] arr = {111, 222, 330, 444, 555};
         System.out.println(palinArray(arr, 5));
 
         // print alternate elements
-        int array[] = {1,2,3,4,5};
-        print(array,4);
+        int array[] = {1, 2, 3, 4, 5};
+        print(array, 4);
 
         System.out.println();
         // binary search
-        int bsarray[] = {1,2,3,4,5};
+        int bsarray[] = {1, 2, 3, 4, 5};
         System.out.println(binarysearch(bsarray, 5, 4));
 
         //FInd triplet with sum of 0
@@ -27,13 +30,37 @@ public class ArrayProblems1 {
         System.out.println(findTripletsBySorting(tripletarray, 5));
 
         // Find union and intersection of two arrays
-        int a[] = {1,1,2,3,4,5};
-        int b[] = {1,2,2,3};
+        int a[] = {1, 1, 2, 3, 4, 5};
+        int b[] = {1, 2, 2, 3};
         System.out.println(doUnion(a, 6, b, 4));
         System.out.println(CommonUtil.printMyArray(doUnionOptimizedSortedSet(a, 6, b, 4)));
-
         System.out.println(CommonUtil.printMyArray(doIntersection(a, 6, b, 4)));
 
+        // Find
+        int array1[] = {5, 3, 2, 4, 1};
+        System.out.println(Maximize(array1, 5));
+
+        try
+        {
+            BufferedReader br = new BufferedReader(new FileReader("/Users/kkohli/Downloads/input.txt"));
+            int n = Integer.parseInt(br.readLine());
+            int array2[] = new int[n];
+            String line = br.readLine();
+            String[] arra = line.split(" ");
+
+
+            for (int i = 0; i < n; i++) {
+                array2[i] = Integer.parseInt(arra[i]);
+            }
+
+            System.out.println("Before::" + CommonUtil.printMyArray(array2));
+            System.out.println(Maximize(array2, n));
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     public static int palinArray(int[] a, int n)
@@ -219,6 +246,20 @@ public class ArrayProblems1 {
             }
         }
         return intersectionSet.toArray(new Integer[0]);
+    }
+
+    static int Maximize(int arr[], int n)
+    {
+        // Complete the function
+        Arrays.sort(arr);
+
+        long sum=0;
+        int M = (int) Math.pow(10,9) + 7;
+        for(int i=0; i<n; i++)
+        {
+            sum = (sum + ((long)arr[i] * i)) % M;
+        }
+        return (int) sum;
     }
 
 

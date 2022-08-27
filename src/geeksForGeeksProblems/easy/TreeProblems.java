@@ -15,6 +15,7 @@ public class TreeProblems {
         bst.display();
 
         System.out.println(inOrder(bst.getRoot()));
+        System.out.println(postOrder(bst.getRoot()));
 
         // Find minimum node
         BinarySearchTree bst2 = new BinarySearchTree(1);
@@ -26,6 +27,8 @@ public class TreeProblems {
         bst2.display();
 
         System.out.println("Mininum value in tree: " + minValue(bst2.getRoot()));
+
+        System.out.println("Leaves count: " + countLeaves(bst2.getRoot()));
 
 
     }
@@ -62,5 +65,46 @@ public class TreeProblems {
         }
         return currNode.getData();
 
+    }
+
+    static int countLeaves(TreeNode node)
+    {
+        // Your code
+        if(node==null)
+            return 0;
+        else if(node.getLeft()==null && node.getRight() == null)
+            return 1;
+
+        int sum = 0;
+        if(node.getLeft()!=null)
+        {
+            sum = sum + countLeaves(node.getLeft());
+        }
+        if(node.getRight()!=null)
+        {
+            sum = sum + countLeaves(node.getRight());
+        }
+
+        return sum;
+    }
+
+    public static ArrayList<Integer> postOrder(TreeNode root) {
+        ArrayList<Integer> postOrderList = new ArrayList<>();
+        if(root == null)
+            return postOrderList;
+        return postOrderTraversalNode(root, postOrderList);
+    }
+
+    private static ArrayList<Integer> postOrderTraversalNode(TreeNode node, ArrayList<Integer> postOrderList) {
+        if(node.getLeft()!=null)
+        {
+            postOrderTraversalNode(node.getLeft(),postOrderList);
+        }
+        if(node.getRight()!=null)
+        {
+            postOrderTraversalNode(node.getRight(),postOrderList);
+        }
+        postOrderList.add(node.getData());
+        return postOrderList;
     }
 }

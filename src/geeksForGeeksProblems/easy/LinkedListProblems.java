@@ -34,6 +34,10 @@ public class LinkedListProblems {
         singlyLinkedListNew.setHead(insertAtBeginning(singlyLinkedListNew.getHead(), 5));
 
         printList(singlyLinkedListNew.getHead());
+
+        // Test insert at middle
+        insertInMid(singlyLinkedListNew.getHead(), 4);
+        printList(singlyLinkedListNew.getHead());
     }
 
     static boolean isCircular(SinglyLinkedListNode head)
@@ -81,14 +85,42 @@ public class LinkedListProblems {
         return head;
     }
 
+    //Function to insert a node at the middle of the linked list.
+    public static SinglyLinkedListNode insertInMid(SinglyLinkedListNode head, int data){
+        //Insert code here, return the head of modified linked list
+
+        if(head == null)
+            return null;
+
+        // 1,2,3,4,5,6
+        SinglyLinkedListNode fastNode = head;
+        SinglyLinkedListNode slowNode = head;
+        while(fastNode.getNext() !=null && fastNode.getNext().getNext()!=null)
+        {
+            fastNode = fastNode.getNext().getNext();
+            slowNode = slowNode.getNext();
+        }
+
+        SinglyLinkedListNode newNode = new SinglyLinkedListNode(data+"");
+
+        if(slowNode.getNext()!=null)
+        {
+            newNode.setNext(slowNode.getNext());
+        }
+        slowNode.setNext(newNode);
+        return head;
+    }
+
     static void printList(SinglyLinkedListNode head){
 
         SinglyLinkedListNode currentNode = head;
-        System.out.println(currentNode.getData() + " ");
+        System.out.print(currentNode.getData() + "->");
 
         while(currentNode.getNext() != null){
             currentNode = currentNode.getNext();
-            System.out.println(currentNode.getData() + " ");
+            System.out.print(currentNode.getData() + "->");
         }
+
+        System.out.println("null");
     }
 }

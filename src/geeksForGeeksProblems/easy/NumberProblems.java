@@ -10,6 +10,10 @@ public class NumberProblems {
         System.out.println("98 Is Power of 2:" + isPowerofTwoOptimized(24));
         System.out.println("98 Is Power of 2:" + isPowerofTwoOptimized2(0));
 
+        System.out.println("Is this number prime:" + isPrime(49));
+
+        System.out.println("Convert five:" + convertfive(1004));
+
     }
 
 
@@ -40,6 +44,38 @@ public class NumberProblems {
         return n>0 && (n & n-1)==0;
 
         // Your code here
+    }
+
+    static int isPrime(int N){
+        // code here
+        if(N==2 || N==3)
+            return 1;
+
+        if(N<=1 || N%2==0 || N%3==0)
+            return 0;
+
+        for(int i=5; i<=Math.sqrt(N); i=i+6)
+        {
+            if(N%i==0 || N%(i+2)==0)
+                return 0;
+        }
+        return 1;
+    }
+
+    static int convertfive(int num) {
+        // Your code here
+        int numNew = 0;
+        int multiplier = 1;
+        while(num>0)
+        {
+            if(num % 10==0)
+                numNew = numNew + 5*multiplier;
+            else
+                numNew = numNew + (num%10)*multiplier;
+            num = num/10;
+            multiplier = multiplier*10;
+        }
+        return numNew;
     }
 
 

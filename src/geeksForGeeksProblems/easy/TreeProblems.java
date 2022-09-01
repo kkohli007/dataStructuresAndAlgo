@@ -30,6 +30,8 @@ public class TreeProblems {
 
         System.out.println("Leaves count: " + countLeaves(bst2.getRoot()));
 
+        System.out.println("Is node 6 present " + search(bst2.getRoot(),2));
+
 
     }
 
@@ -106,5 +108,28 @@ public class TreeProblems {
         }
         postOrderList.add(node.getData());
         return postOrderList;
+    }
+
+    // O(hieght of tree)
+    public static boolean search(TreeNode root, int x) {
+        // Your code here
+        if(root == null)
+            return false;
+        else
+        {
+            if(root.getData() == x)
+            {
+                return true;
+            }
+            else if(root.getData() < x)
+            {
+                return search(root.getRight(), x);
+            }
+            else
+            {
+                return search(root.getLeft(), x);
+            }
+        }
+
     }
 }

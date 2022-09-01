@@ -38,6 +38,10 @@ public class LinkedListProblems {
         // Test insert at middle
         insertInMid(singlyLinkedListNew.getHead(), 4);
         printList(singlyLinkedListNew.getHead());
+
+        //isLengthEvenorOdd
+        System.out.println("isLengthEvenorOdd:" + isLengthEvenorOdd(singlyLinkedListNew.getHead()));
+        System.out.println("isLengthEvenorOdd:" + isLengthEvenorOddOptimized(singlyLinkedListNew.getHead()));
     }
 
     static boolean isCircular(SinglyLinkedListNode head)
@@ -122,5 +126,55 @@ public class LinkedListProblems {
         }
 
         System.out.println("null");
+    }
+
+    static int isLengthEvenorOdd(SinglyLinkedListNode head1)
+    {
+        //Add your code here.
+        if(head1==null)
+            return 0;
+
+        SinglyLinkedListNode slowNode = head1;
+        SinglyLinkedListNode fastNode = head1;
+
+        boolean isEven = false;
+
+        while(slowNode.getNext()!=null)
+        {
+            slowNode = slowNode.getNext();
+
+            if(fastNode.getNext() == null)
+            {
+                break;
+            }
+            else if(fastNode.getNext().getNext() == null)
+            {
+                isEven=true;
+                break;
+            }
+            else
+            {
+                fastNode = fastNode.getNext().getNext();
+            }
+        }
+
+        if(isEven)
+            return 0;
+        else
+            return 1;
+    }
+
+
+    static int isLengthEvenorOddOptimized(SinglyLinkedListNode head1)
+    {
+        //Add your code here.
+        while(head1!=null && head1.getNext()!=null)
+        {
+            head1 = head1.getNext().getNext();
+        }
+
+        if(head1==null)
+            return 0;
+        return 1;
     }
 }

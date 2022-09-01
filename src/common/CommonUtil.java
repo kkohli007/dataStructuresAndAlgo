@@ -4,7 +4,9 @@ import src.dto.Employee;
 import src.dto.HashedEmployee;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class CommonUtil {
 
@@ -154,4 +156,19 @@ public class CommonUtil {
         sb.append("----End Printing my employee list----");
         return sb.toString();
     }
+
+    public static String printMyQueue(Queue<Integer> queue) {
+        StringBuilder sb = new StringBuilder();
+
+        Iterator<Integer> iterator = queue.iterator();
+
+        while(iterator.hasNext())
+        {
+            sb.append(iterator.next() + "-->");
+        }
+        sb.append("null");
+
+        return sb.toString();
+    }
 }
+

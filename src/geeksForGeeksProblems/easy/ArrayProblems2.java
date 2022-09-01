@@ -30,9 +30,13 @@ public class ArrayProblems2 {
         System.out.println(CommonUtil.printMyArrayListLong(find(array3, 9, 5)));
         System.out.println(CommonUtil.printMyArrayListLong(findFirstLastOccurrence(array3, 9, 5)));
 
+        // count elements
+        int array4[] = {10,11};
+        System.out.println("Count::"+count(array4, array4.length, 10));
+
         // third largest element in array
-        int array4[] = {2,4,1,3,5};
-        System.out.println(thirdLargest(array4, array4.length));
+        int array5[] = {2,4,1,3,5};
+        System.out.println(thirdLargest(array5, array5.length));
     }
 
     // O(n)
@@ -214,6 +218,22 @@ public class ArrayProblems2 {
             return findLastOccurrence(arr, mid+1, high, x);
         }
     }
+
+    static int count(int[] arr, int n, int x) {
+        // code here
+
+        int firstOccurrence = findFirstOccurrence(Arrays.stream(arr).mapToLong(i -> i).toArray(), 0, n, x);
+
+        if(firstOccurrence<0)
+        {
+            return 0;
+        }
+
+        int lastOccurrence = findLastOccurrence(Arrays.stream(arr).mapToLong(i -> i).toArray(), 0, n, x);
+
+        return lastOccurrence - firstOccurrence + 1;
+    }
+
     static int thirdLargest(int a[], int n)
     {
         if(n<3)

@@ -48,51 +48,9 @@ class TestDoublyLinkedList
 
 public class DoublyLinkedList
 {
-    private class Node
-    {
-        private String data;
-
-        private Node previous;
-
-        private Node next;
-
-        public String getData() {
-            return data;
-        }
-
-        public void setData(String data) {
-            this.data = data;
-        }
-
-        public Node getNext() {
-            return next;
-        }
-
-        public void setNext(Node next) {
-            this.next = next;
-        }
-
-        public Node getPrevious() {
-            return previous;
-        }
-
-        public void setPrevious(Node previous) {
-            this.previous = previous;
-        }
-
-        @Override
-        public String toString() {
-            return "Node{" +
-                    "data='" + data + '\'' +
-                    ", previous=" + (previous!=null?previous.getData():null) +
-                    ", next=" + (next!=null?next.getData():null) +
-                    '}';
-        }
-    }
-
-    private Node head = null;
+    private DoublyLinkedListNode head = null;
     // optional tail reference to add to end with O(1)
-    private Node tail = null;
+    private DoublyLinkedListNode tail = null;
 
     private int size = 0;
 
@@ -102,7 +60,7 @@ public class DoublyLinkedList
      */
     public void addNodeAtFront(String data)
     {
-        Node node = new Node();
+        DoublyLinkedListNode node = new DoublyLinkedListNode();
         node.setData(data);
         size++;
 
@@ -124,7 +82,7 @@ public class DoublyLinkedList
      */
     public void addNodeAtBack(String data)
     {
-        Node node = new Node();
+        DoublyLinkedListNode node = new DoublyLinkedListNode();
         node.setData(data);
         size++;
 
@@ -160,14 +118,14 @@ public class DoublyLinkedList
         else
         {
             int currentPosition = 0;
-            Node currentNode = head;
+            DoublyLinkedListNode currentNode = head;
             while( currentPosition < index - 1 )
             {
                 currentPosition++;
                 currentNode = currentNode.getNext();
             }
 
-            Node node = new Node();
+            DoublyLinkedListNode node = new DoublyLinkedListNode();
             node.setData(data);
             node.setNext(currentNode.getNext());
             currentNode.setNext(node);
@@ -230,7 +188,7 @@ public class DoublyLinkedList
         else
         {
             int currentPosition = 0;
-            Node currentNode = head;
+            DoublyLinkedListNode currentNode = head;
             while( currentPosition < index - 1 )
             {
                 currentPosition++;
@@ -250,7 +208,25 @@ public class DoublyLinkedList
         else
         {
             System.out.print("MyList :: null <--> ");
-            Node currentNode = head;
+            DoublyLinkedListNode currentNode = head;
+            while(currentNode != null)
+            {
+                System.out.print("{"+currentNode.getData()+"}");
+                currentNode = currentNode.getNext();
+                System.out.print(" <--> ");
+            }
+            System.out.println("null");
+        }
+    }
+
+    public void display(DoublyLinkedListNode head)
+    {
+        if (head == null)
+            System.out.println("MyList :: null");
+        else
+        {
+            System.out.print("MyList :: null <--> ");
+            DoublyLinkedListNode currentNode = head;
             while(currentNode != null)
             {
                 System.out.print("{"+currentNode.getData()+"}");
@@ -271,7 +247,7 @@ public class DoublyLinkedList
         }
     }
 
-    public Node getHead()
+    public DoublyLinkedListNode getHead()
     {
         return head;
     }

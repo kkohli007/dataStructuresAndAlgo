@@ -1,5 +1,7 @@
 package src.geeksForGeeksProblems.easy;
 
+import src.dataStructures.lists.DoublyLinkedList;
+import src.dataStructures.lists.DoublyLinkedListNode;
 import src.dataStructures.lists.SinglyLinkedList;
 import src.dataStructures.lists.SinglyLinkedListNode;
 
@@ -42,6 +44,51 @@ public class LinkedListProblems {
         //isLengthEvenorOdd
         System.out.println("isLengthEvenorOdd:" + isLengthEvenorOdd(singlyLinkedListNew.getHead()));
         System.out.println("isLengthEvenorOdd:" + isLengthEvenorOddOptimized(singlyLinkedListNew.getHead()));
+
+        // Delete node from position in doublylinkedlist
+        DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
+        doublyLinkedList.addNodeAtBack("1");
+        doublyLinkedList.addNodeAtBack("3");
+        doublyLinkedList.addNodeAtBack("4");
+        doublyLinkedList.display();
+        DoublyLinkedListNode newHead = deleteNode(doublyLinkedList.getHead(), 3);
+        doublyLinkedList.display(newHead);
+    }
+
+    // delete node at position, position starts at 1
+    static DoublyLinkedListNode deleteNode(DoublyLinkedListNode head, int x)
+    {
+        // Your code here
+        if(head==null)
+            return null;
+
+        DoublyLinkedListNode currNode = head;
+        int counter = 1;
+        while(counter<x && currNode!=null)
+        {
+            currNode = currNode.getNext();
+            counter++;
+        }
+
+        if(currNode!=null)
+        {
+            DoublyLinkedListNode previous = currNode.getPrevious();
+
+            if(previous==null)
+            {
+                head = currNode.getNext();
+                if(head!=null)
+                    head.setPrevious(null);
+            }
+            else
+            {
+                DoublyLinkedListNode next = currNode.getNext();
+                previous.setNext(next);
+                if(next!=null)
+                    next.setPrevious(previous);
+            }
+        }
+        return head;
     }
 
     static boolean isCircular(SinglyLinkedListNode head)
@@ -138,7 +185,6 @@ public class LinkedListProblems {
         SinglyLinkedListNode fastNode = head1;
 
         boolean isEven = false;
-
         while(slowNode.getNext()!=null)
         {
             slowNode = slowNode.getNext();
@@ -157,7 +203,6 @@ public class LinkedListProblems {
                 fastNode = fastNode.getNext().getNext();
             }
         }
-
         if(isEven)
             return 0;
         else
@@ -172,7 +217,6 @@ public class LinkedListProblems {
         {
             head1 = head1.getNext().getNext();
         }
-
         if(head1==null)
             return 0;
         return 1;

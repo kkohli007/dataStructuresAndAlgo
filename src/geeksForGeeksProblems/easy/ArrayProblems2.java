@@ -37,6 +37,44 @@ public class ArrayProblems2 {
         // third largest element in array
         int array5[] = {2,4,1,3,5};
         System.out.println(thirdLargest(array5, array5.length));
+
+        // binary sort
+        int array6[] = {1};
+        binSort(array6, array6.length);
+        System.out.println("Array6 Print:" + CommonUtil.printMyArray(array6));
+    }
+
+    static void binSort(int A[], int N)
+    {
+        // add your code here
+
+        for(int i=0,j=A.length-1;i<j;)
+        {
+            if(A[i]==1 && A[j]==0)
+            {
+                int temp = A[i];
+                A[i] = A[j];
+                A[j] = temp;
+                i++;
+                j--;
+            }
+            else if(A[i]==0 && A[j]==1)
+            {
+                i++;
+                j--;
+            }
+            else if(A[i]==1 && A[j]==1)
+            {
+                j--;
+            }
+            else
+            {
+                i++;
+            }
+        }
+        /**************
+         * No need to print the array
+         * ************/
     }
 
     // O(n)
@@ -263,5 +301,4 @@ public class ArrayProblems2 {
         }
         return third;
     }
-
 }

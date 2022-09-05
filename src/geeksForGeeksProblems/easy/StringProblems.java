@@ -3,6 +3,9 @@ package src.geeksForGeeksProblems.easy;
 import src.dataStructures.queues.QueueUsingArray;
 import src.dataStructures.stack.StackUsingLinkedList;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class StringProblems {
 
     public static void main(String[] args)
@@ -31,6 +34,28 @@ public class StringProblems {
         //Function to locate the occurrence of the string x in the string s.
         System.out.println(strstr("ccdeecbdfedcbabfdfaebdaf", "fecfacbccfe"));
         System.out.println(strstrSpaceOptimized("GeeksForGeeks", "For"));
+
+        //Anagram of String
+        System.out.println("Anagram:"+ remAnagrams("basgadhbfgvhads","sjdhgvbjdsbhvbvd"));
+    }
+
+    public static int remAnagrams(String s,String s1)
+    {
+        //add code here.
+        int[] countArray= new int[26];
+
+        for (char c : s.toCharArray()) {
+            countArray[c - 'a']++;
+        }
+
+        for (char c : s1.toCharArray()) {
+            countArray[c - 'a']--;
+        }
+
+        int count = 0;
+        for(int i=0; i<26; i++)
+            count = count + Math.abs(countArray[i]);
+        return count;
     }
 
     //O(n)

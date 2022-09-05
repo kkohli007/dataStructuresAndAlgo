@@ -1,6 +1,7 @@
 package src.geeksForGeeksProblems.easy;
 
 import java.math.BigInteger;
+import java.util.Stack;
 
 public class NumberProblems {
     public static void main(String[] args) {
@@ -14,6 +15,90 @@ public class NumberProblems {
 
         System.out.println("Convert five:" + convertfive(1004));
 
+        System.out.println("Count bits flip:" + countBitsFlip(10,20));
+        System.out.println("Count bits flip:" + countBitsFlipOptimized(10,20));
+        System.out.println("Count bits flip:" + FlippedCount(10,10));
+    }
+
+    // Function that count set bits
+    public static int countSetBits(int n)
+    {
+        int count = 0;
+        while (n != 0) {
+            count++;
+            n = n&(n-1);
+        }
+        return count;
+    }
+
+    // Function that return count of
+    // flipped number
+    public static int FlippedCount(int a, int b)
+    {
+        // Return count of set bits in
+        // a XOR b
+        return countSetBits(a ^ b);
+    }
+
+    //O(logN), but space 1
+    public static int countBitsFlipOptimized(int a, int b){
+        // Your code here
+        int counter = 0;
+        while(a!=0 || b!=0)
+        {
+            if(a==0)
+            {
+                if(b%2!=0)
+                    counter++;
+                b=b/2;
+            }
+            else if(b==0)
+            {
+                if(a%2!=0)
+                    counter++;
+                a=a/2;
+            }
+            else
+            {
+                if(a%2!=b%2)
+                    counter++;
+                a=a/2;
+                b=b/2;
+            }
+        }
+        return counter;
+    }
+
+    //O(logN), but space also O(logn)
+    public static int countBitsFlip(int a, int b){
+        // Your code here
+        Stack<Integer> aStack = new Stack();
+        Stack<Integer> bStack = new Stack();
+
+        while(a!=0)
+        {
+            aStack.push(a%2);
+            a=a/2;
+        }
+        while(b!=0)
+        {
+            bStack.push(b%2);
+            b=b/2;
+        }
+
+        while(aStack.size()<bStack.size())
+            aStack.push(0);
+
+        while(bStack.size()<aStack.size())
+            bStack.push(0);
+
+        int counter=0;
+        while (!aStack.isEmpty() && !bStack.isEmpty())
+        {
+            if(aStack.pop()!=bStack.pop())
+                counter++;
+        }
+        return counter;
     }
 
 
@@ -77,6 +162,4 @@ public class NumberProblems {
         }
         return numNew;
     }
-
-
 }

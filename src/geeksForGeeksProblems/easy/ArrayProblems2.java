@@ -5,6 +5,7 @@ import src.common.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class ArrayProblems2 {
 
@@ -42,6 +43,43 @@ public class ArrayProblems2 {
         int array6[] = {1};
         binSort(array6, array6.length);
         System.out.println("Array6 Print:" + CommonUtil.printMyArray(array6));
+
+        // kLargest
+        int array7[] = {12,7,787,1,23};
+        System.out.println(CommonUtil.printMyArrayList(kLargest(array7, 5,2)));
+    }
+
+    // O(nlog(n)) to sort + O(k) to traverse and put to list. so O(nlog(n))
+    public static ArrayList<Integer> kLargest(int arr[], int n, int k)
+    {
+        // code here
+        arr = Arrays.stream(arr)
+                .boxed()
+                .sorted(Collections.reverseOrder())
+                .mapToInt(Integer::intValue)
+                .toArray();
+
+        ArrayList<Integer> retList = new ArrayList<>();
+
+        for(int i=0; i<k;i++)
+            retList.add(arr[i]);
+        return retList;
+    }
+
+    public static ArrayList<Integer> kLargestOptimized(int arr[], int n, int k)
+    {
+        // code here
+        arr = Arrays.stream(arr)
+                .boxed()
+                .sorted(Collections.reverseOrder())
+                .mapToInt(Integer::intValue)
+                .toArray();
+
+        ArrayList<Integer> retList = new ArrayList<>();
+
+        for(int i=0; i<k;i++)
+            retList.add(arr[i]);
+        return retList;
     }
 
     static void binSort(int A[], int N)

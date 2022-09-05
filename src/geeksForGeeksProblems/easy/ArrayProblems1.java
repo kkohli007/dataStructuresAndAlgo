@@ -36,31 +36,62 @@ public class ArrayProblems1 {
         System.out.println(CommonUtil.printMyArray(doUnionOptimizedSortedSet(a, 6, b, 4)));
         System.out.println(CommonUtil.printMyArray(doIntersection(a, 6, b, 4)));
 
-        // Find
+        // Maximize
         int array1[] = {5, 3, 2, 4, 1};
         System.out.println(Maximize(array1, 5));
-
-        try
+        /*try
         {
             BufferedReader br = new BufferedReader(new FileReader("/Users/kkohli/Downloads/input.txt"));
             int n = Integer.parseInt(br.readLine());
             int array2[] = new int[n];
             String line = br.readLine();
             String[] arra = line.split(" ");
-
-
             for (int i = 0; i < n; i++) {
                 array2[i] = Integer.parseInt(arra[i]);
             }
-
             System.out.println("Before::" + CommonUtil.printMyArray(array2));
             System.out.println(Maximize(array2, n));
-
         }
         catch (Exception e)
         {
             System.out.println(e);
+        }*/
+
+        // zigZag
+        int array2[] = {1, 4, 3, 2};
+        zigZag(array2, 4);
+        System.out.println(CommonUtil.printMyArray(array2));
+    }
+
+    // O(n)
+    static  void zigZag(int arr[], int n) {
+        // code here
+        for(int i=0;i<n-1;i++)
+        {
+            if(i%2==0 && arr[i]>arr[i+1])
+            {
+                CommonUtil.swap(arr, i, i+1);
+            }
+            else if(i%2==1 && arr[i]<arr[i+1])
+            {
+                CommonUtil.swap(arr, i, i+1);
+            }
         }
+        /*
+         In this approach, rather than sorting the complete array,
+         we will maintain a flag for representing which order(i.e.,< or >) we currently need.
+         If the current two elements are not in that order, then swap those elements, otherwise not.
+         Algo:
+            Set the flag to true.
+            Traverse over the array from 0 to n-2 (where n is the length of the array).
+            Check if the flag is true
+                Check if the current element is greater than the next element.
+                Swap those values.
+            Else, check if the current element is greater than the next element.
+                Check if the current element is lesser than the next element.
+                Swap those values.
+            Flip the value of the flag.
+         */
     }
 
     public static int palinArray(int[] a, int n)
@@ -261,6 +292,4 @@ public class ArrayProblems1 {
         }
         return (int) sum;
     }
-
-
 }
